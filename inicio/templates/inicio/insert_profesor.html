@@ -1,0 +1,23 @@
+{% extends 'tbase.html' %}
+
+{% block title_head %}
+<title>Profesores</title>
+{% endblock title_head %}
+
+{% block h1_header %}
+Aca podes insertar profesores
+{% endblock h1_header %}
+
+{% block content %}
+
+<p>{{mensajeC}}</p>
+
+    <form action="" method='post'>
+        {% csrf_token %}
+        <table>
+            {{formularioC}}
+        </table>
+        <button>Guardar</button>
+    </form>
+
+{% endblock content %}  
