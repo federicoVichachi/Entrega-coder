@@ -5,6 +5,9 @@ class InsertAlumnoForm(forms.Form):
     edad = forms.IntegerField()
     curso = forms.CharField(max_length=30)
 
+class SearchAlumno(forms.Form):
+    nombre = forms.CharField(max_length=20, required=False)
+
 class InsertCursoForm(forms.Form):
     contenido = forms.CharField(max_length=30)
     duracion = forms.IntegerField()

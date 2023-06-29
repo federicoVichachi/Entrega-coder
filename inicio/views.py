@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from inicio.forms import InsertAlumnoForm, InsertCursoForm, InsertProfesorForm
+from django.shortcuts import render, redirect
+from inicio.forms import InsertAlumnoForm, SearchAlumno, InsertCursoForm, InsertProfesorForm
 from inicio.models import Alumno, Curso, Profesor
 # Create your views here.
 
@@ -14,12 +14,20 @@ def insert_alumno(request):
             info = formulario.cleaned_data
             alumno = Alumno(nombre = info['nombre'], edad = info['edad'], curso = info['curso'])
             alumno.save()
-            return render(request, 'inicio/insert_alumno.html', {'formularioA': formulario, 'mensajeA': f'Se inscribio el alumno con nombre {alumno.nombre}, edad {alumno.edad} y esta cursando {alumno.curso}'})
+            return redirect('inicio:lista_alumnos')
         else:
             return render(request, 'inicio/insert_alumno.html', {'formularioA': formulario})
     
     formulario = InsertAlumnoForm()
     return render(request, 'inicio/insert_alumno.html', {'formularioA': formulario})
+
+def list_alumno(request):
+    
+    formulario = SearchAlumno(request.GET)
+    if formulario.is_valid():
+        nombre_a_buscar = formulario.cleaned_data['nombre']
+        listado_alumnos = Alumno.objects.filter(nombre__icontains = nombre_a_buscar)
+    return render(request, 'inicio/lista_alumnos.html', {'formularioBusqueda': formulario, 'alumnos': listado_alumnos})
 
 def insert_curso(request):
     

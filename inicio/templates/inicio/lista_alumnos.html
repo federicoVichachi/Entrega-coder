@@ -1,0 +1,28 @@
+{% extends 'tbase.html' %}
+
+{% block title_head %}
+<title>Lista del alumnado</title>
+{% endblock title_head %}
+
+{% block h1_header %}
+Aca podes ver la lista de los alumnos inscritos
+{% endblock h1_header %}
+
+{% block content %}
+
+<a href={% url 'inicio:insertar_alumno' %}>Aca podes inscribir un alumno en la lista</a>
+
+<form action="" method="get">
+    {{formularioBusqueda}}
+    <button>Buscar</button>
+</form>
+{% if alumnos %}
+{% for alumno in alumnos %}
+<li style='color: black'>Nombre:{{alumno.nombre}} | Edad: {{alumno.edad}} | Cursando: {{alumno.curso}}</li>
+{% endfor %}
+{% else %}
+<p>No se ha encontrado.</p>
+{% endif %}
+
+
+{% endblock content %}  
