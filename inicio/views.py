@@ -56,3 +56,4 @@ def insert_profesor(request):
             return render(request, 'inicio/insert_profesor.html', {'formularioC': formulario})
     formulario = InsertProfesorForm()
     return render(request, 'inicio/insert_profesor.html', {'formularioC': formulario})
+

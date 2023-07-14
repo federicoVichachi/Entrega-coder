@@ -1,0 +1,20 @@
+{% extends 'tbase.html' %}
+
+{% block title_head %}
+<title>Inicio de sesión</title>
+{% endblock title_head %}
+
+{% block h1_header %}
+Iniciar sesión
+{% endblock h1_header %}
+
+{% block content %}
+            <form action=  {% url 'user:login' %} method="POST">
+                {% csrf_token %}
+                <table>
+                    {{formulario}}
+                </table>
+                <button>Iniciar sesión</button>
+            </form>
+{% endblock content %}
+

@@ -1,0 +1,19 @@
+{% extends 'tbase.html' %}
+
+{% block title_head %}
+<title>Registrarse</title>
+{% endblock title_head %}
+
+{% block h1_header %}
+Registrate
+{% endblock h1_header %}
+
+{% block content %}
+            <form action=  {% url 'user:register' %}  method="POST">
+                {% csrf_token %}
+                <table>
+                    {{formulario}}
+                </table>
+                <button>Crear usuario</button>
+            </form>
+{% endblock content %}
