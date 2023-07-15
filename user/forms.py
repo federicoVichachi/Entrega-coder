@@ -2,6 +2,8 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm,UserChangeForm
 from django.contrib.auth.models import User
 
+
+
 class LoginForm(UserCreationForm):
     email = forms.EmailField()
     password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput)
@@ -17,7 +19,8 @@ class MiFormularioDeEdicionDeDatosUsuario (UserChangeForm):
     email = forms.EmailField()
     first_name = forms.CharField(label='Nombre', max_length=20)
     last_name = forms.CharField(label='Apellido', max_length=20)
-    avatar =forms.ImageField(required=False) 
+    avatar =forms.ImageField(required=False)
+    
     
     class Meta:
         model=User

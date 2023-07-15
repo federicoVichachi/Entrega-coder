@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
 from inicio.forms import InsertAlumnoForm, SearchAlumno, InsertCursoForm, InsertProfesorForm
 from inicio.models import Alumno, Curso, Profesor
+from django.views.generic.list import ListView
 # Create your views here.
 
 def inicio (request):
     return render(request, 'inicio/inicio.html')
+    
 
 def insert_alumno(request):
     
@@ -57,3 +59,5 @@ def insert_profesor(request):
     formulario = InsertProfesorForm()
     return render(request, 'inicio/insert_profesor.html', {'formularioC': formulario})
 
+def about_me(request):
+    return render(request, 'inicio/about_me.html')
