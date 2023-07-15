@@ -1,0 +1,21 @@
+{% extends 'tbase.html' %}
+
+{% block title_head %}
+<title>Edicion de perfil</title>
+{% endblock title_head %}
+
+{% block h1_header %}
+Editar perfil 
+{% endblock h1_header %}
+
+{% block content %}
+<form action= {% url 'user:edicion_perfil' %} method="POST" enctype='multipart/form-data'>
+        {% csrf_token %}
+        <table>
+                {{formulario}}
+        </table>
+        <button>Guardar cambios</button>
+        <button type='button'><a class='navbar-brand' href={% url 'user:modificar_pass' %}>Cambiar tu password</a></button>
+</form>
+{% endblock content %}
+

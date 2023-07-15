@@ -1,0 +1,18 @@
+{% extends 'tbase.html' %}
+{%block title_head%}
+<title>Cambiar password</title>
+{% endblock title_head %}
+
+{% block h1_header %}
+Cambiar password
+{%endblock h1_header %}
+
+{% block content %}
+<form action= {% url 'user:modificar_pass' %} method="POST">
+        {% csrf_token %}
+        <table>
+                {{form}}
+        </table>
+        <button>Cambiar</button>
+</form>
+{% endblock content %}
