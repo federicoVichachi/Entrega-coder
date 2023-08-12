@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from inicio.forms import InsertAlumnoForm, SearchAlumno, InsertCursoForm, InsertProfesorForm
 from inicio.models import Alumno, Curso, Profesor
-from django.views.generic.list import ListView
+from django.views.generic.edit import UpdateView, DeleteView
+from django.views.generic.detail import DetailView
+from django.urls import reverse_lazy
 # Create your views here.
 
 def inicio (request):
@@ -30,6 +32,26 @@ def list_alumno(request):
         nombre_a_buscar = formulario.cleaned_data['nombre']
         listado_alumnos = Alumno.objects.filter(nombre__icontains = nombre_a_buscar)
     return render(request, 'inicio/lista_alumnos.html', {'formularioBusqueda': formulario, 'alumnos': listado_alumnos})
+
+class DetalleAlumno(DetailView):
+    model = Alumno
+    template_name = "inicio/detalle_alumnos.html"
+
+class ModificarAlumno(UpdateView):
+    model = Alumno
+    fields = ['nombre', 'edad', 'curso', 'descripcion', 'foto', 'fecha_ingreso'] 
+    template_name = "inicio/modificar_alumnos.html"
+    success_url = reverse_lazy('inicio:lista_alumnos')
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        return response
+
+class EliminarAlumno(DeleteView):
+    model = Alumno
+    template_name = "inicio/eliminar_alumnos.html"
+    success_url = reverse_lazy('inicio:lista_alumnos')
+
 
 def insert_curso(request):
     

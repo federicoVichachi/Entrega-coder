@@ -11,6 +11,9 @@
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href={% static 'css/styles.css' %} rel="stylesheet" />
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+
     </head>
     <body>
         <!-- Responsive navbar-->
@@ -24,11 +27,14 @@
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href={% url 'inicio:lista_alumnos' %}>Alumnos</a></li>
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href={% url 'inicio:insertar_curso' %}>Cursos</a></li>
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href={% url 'inicio:insertar_profesor' %}>Profesores</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href={% url 'mensajeria:lista_mensajes' %}>Ver mensajes</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href={% url 'mensajeria:usuarios' %}>Enviar mensaje</a></li>
+                        
                         {% if request.user.is_authenticated %}
                         {% if request.user.infoextra.avatar %}
                         <img src="{{request.user.infoextra.avatar.url}}" alt="" height= '40px'>
                         {% endif %}
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href={% url 'user:edicion_perfil' %}>{{request.user.username}}</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href={% url 'user:perfil' %}>{{request.user.username}}</a></li>
                         <a class="btn btn-danger" href={% url 'user:logout' %}>Cerrar sesión</a>
                         {% else %}
                         <a style="margin-right: 10px" class="btn btn-outline-secondary" href={% url 'user:login' %}>Iniciar sesión</a>

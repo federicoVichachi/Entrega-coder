@@ -1,0 +1,19 @@
+{% extends 'tbase.html' %}
+
+{% block title_head %}
+<title>Modificar alumnos</title>
+{% endblock title_head %}
+
+{% block h1_header %}
+Aquí puedes modificar la información del alumno {{alumno.nombre}}
+{% endblock h1_header %}
+
+{% block content %}
+<table>
+    <form action="{% url 'inicio:modificar_alumnos' alumno.id %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_table }}
+        <button type="submit">Modificar</button>
+    </form>
+</table>
+{% endblock content %}  

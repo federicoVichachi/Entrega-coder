@@ -1,0 +1,41 @@
+{% extends 'tbase.html' %}
+
+{% block title_head %}
+<title>Tu perfil</title>
+{% endblock title_head %}
+
+{% block h1_header %}
+Tu perfil
+{% endblock h1_header %}
+
+{% block content %}
+<h1>Datos del perfil</h1>
+{% if request.user.infoextra.avatar %}
+    <p>Avatar: <img src="{{ request.user.infoextra.avatar.url }}" alt="" height="170px"></p>
+{% else %}
+    <p>Avatar: <i>No has seleccionado ninguna foto para que sea tu avatar.</i></p>
+{% endif %}
+<p>Usuario: {{ request.user.username }}</p>
+<p>Email: {{ request.user.email }}</p>
+{% if  request.user.first_name %}
+    <p>Nombre: {{ request.user.first_name }}</p>
+{% else %}
+    <p>Nombre: <i>No has escrito el nombre del propietario de la cuenta, si deseas hacerlo ve a modificar perfil.</i></p>
+{% endif %}
+
+{% if  request.user.last_name %}
+    <p>Apellido: {{ request.user.last_name }}</p>   
+{% else %}
+    <p>Apellido: <i>No has escrito el apellido del propietario de la cuenta, si deseas hacerlo ve a modificar perfil.</i></p>
+{% endif %}
+
+{% if request.user.infoextra.fecha_nacimiento %}
+<p>Fecha de Nacimiento: {{ info_extra.fecha_nacimiento }}</p>
+{% else %}
+    <p>No has agregado una fecha de nacimiento</p>
+{% endif %}
+<h1>¿Deseas modificar tu usuario?</h1>
+<button class="btn btn-primary">
+    <a style='color:white' href={% url 'user:edicion_perfil' %}>Modificar perfil</a>
+</button>
+{% endblock content %}

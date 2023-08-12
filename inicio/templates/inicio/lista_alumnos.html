@@ -18,7 +18,16 @@ Aca podes ver la lista de los alumnos inscritos
 </form>
 {% if alumnos %}
 {% for alumno in alumnos %}
-<li style='color: black'>Nombre:{{alumno.nombre}} | Edad: {{alumno.edad}} | Cursando: {{alumno.curso}}</li>
+<li>
+    {{alumno}}
+    <a style='color: black' href={% url 'inicio:detalle_alumnos' alumno.id %}><i class='bx bxs-plus-circle'></i></a>
+    <button class="btn btn-primary">
+        <a style='color: white'  href={% url 'inicio:modificar_alumnos' alumno.id %}>Modificar</a>
+    </button>
+    <button class="btn btn-danger">
+        <a style='color:white' href={% url 'inicio:eliminar_alumnos' alumno.id %}>Eliminar</a>
+    </button>
+</li>
 {% endfor %}
 {% else %}
 <p>No se ha encontrado.</p>

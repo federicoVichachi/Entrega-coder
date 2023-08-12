@@ -1,0 +1,19 @@
+{% extends 'tbase.html' %}
+
+{% block title_head %}
+<title>Usuarios</title>
+{% endblock title_head %}
+
+{% block h1_header %}
+Lista de usuarios
+{% endblock h1_header %}
+
+{% block content %}
+<ul>
+    {% for usuario in usuarios %}
+        <li>
+            {{ usuario.username }} - <a href={% url 'mensajeria:enviar_mensaje' destinatario_id=usuario.id %}>Enviar Mensaje</a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock content %}

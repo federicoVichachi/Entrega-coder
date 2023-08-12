@@ -14,14 +14,14 @@ class LoginForm(UserCreationForm):
         fields = ['username', 'email', 'password1', 'password2']
         help_texts = {k:"" for k in fields}
         
-class MiFormularioDeEdicionDeDatosUsuario (UserChangeForm):
+class MiFormularioDeEdicionDeDatosUsuario(UserChangeForm):
     password = None
     email = forms.EmailField()
     first_name = forms.CharField(label='Nombre', max_length=20)
     last_name = forms.CharField(label='Apellido', max_length=20)
-    avatar =forms.ImageField(required=False)
-    
-    
+    avatar = forms.ImageField(required=False)
+    fecha_nacimiento = forms.DateField(label='Fecha de Nacimiento', required=False)
+
     class Meta:
-        model=User
-        fields = ['email','first_name', 'last_name', 'avatar'] 
+        model = User
+        fields = ['email', 'first_name', 'last_name', 'avatar', 'fecha_nacimiento']

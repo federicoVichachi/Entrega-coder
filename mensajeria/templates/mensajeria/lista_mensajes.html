@@ -1,0 +1,27 @@
+{% extends 'tbase.html' %}
+
+{% block title_head %}
+<title>Mensajería</title>
+{% endblock title_head %}
+
+{% block h1_header %}
+Mensajería
+{% endblock h1_header %}
+
+{% block content %}
+
+    <h2>Lista de Mensajes</h2>
+    <ul>
+        {% for mensaje in mensajes %}
+            <li>
+                De: {{ mensaje.remitente.username }}<br>
+                Contenido: {{ mensaje.contenido }}<br>
+                {% if mensaje.leido %}
+                    <p>Leído</p>
+                {% else %}
+                    No leído
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock content %}

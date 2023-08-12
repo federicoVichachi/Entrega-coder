@@ -1,0 +1,18 @@
+{% extends 'tbase.html' %}
+
+{% block title_head %}
+<title>Enviar mensaje</title>
+{% endblock title_head %}
+
+{% block h1_header %}
+Enviar mensaje
+{% endblock h1_header %}
+
+{% block content %}
+<h2>Destinatario: {{ destinatario.username }}</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">Enviar</button>
+    </form>
+{% endblock content %}

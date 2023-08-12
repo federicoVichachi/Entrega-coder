@@ -7,6 +7,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from user.forms import LoginForm, MiFormularioDeEdicionDeDatosUsuario
 from django.urls import reverse_lazy
 from user.models import InfoExtra
+from django.views.generic.edit import UpdateView
+from django.contrib.auth.models import User
 # Create your views here.
 
 def login(request):
@@ -47,25 +49,35 @@ def register (request):
     
     return render(request,'user/register.html',{'formulario':formulario})
 
+
 @login_required
-def edicion_perfil (request):
+def ver_perfil(request):
+    info_extra = request.user.infoextra
+    context = {
+        'info_extra': info_extra,
+    }
+    return render(request, 'user/ver_perfil.html', context)
 
-    info_extra_user = request.user.infoextra
-    if request.method == 'POST':
-        formulario = MiFormularioDeEdicionDeDatosUsuario (request.POST, request.FILES, instance= request.user)
-        if formulario.is_valid():
-            
-            avatar = formulario.cleaned_data.get('avatar')
-            if avatar:
-                info_extra_user.avatar = avatar
-                info_extra_user.save()
 
-            formulario.save()
-            return redirect('inicio:inicio')           
-    else:
-        formulario= MiFormularioDeEdicionDeDatosUsuario (initial={'avatar':request.user.infoextra.avatar},instance= request.user) 
-                
-    return render(request,'user/edicion_perfil.html',{'formulario':formulario})
+class EdicionPerfilView(LoginRequiredMixin, UpdateView):
+    model = User
+    form_class = MiFormularioDeEdicionDeDatosUsuario
+    template_name = 'user/edicion_perfil.html'
+    success_url = reverse_lazy('user:perfil')
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        
+        fecha_nacimiento = form.cleaned_data.get('fecha_nacimiento')
+        if fecha_nacimiento:
+            self.object.infoextra.fecha_nacimiento = fecha_nacimiento
+            self.object.infoextra.save()
+
+        return response
+
 
 class ModificarPass (LoginRequiredMixin, PasswordChangeView):
     template_name = 'user/modificar_pass.html'

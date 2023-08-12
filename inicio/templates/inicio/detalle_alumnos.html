@@ -1,0 +1,21 @@
+{% extends 'tbase.html' %}
+
+{% block title_head %}
+<title>Alumno</title>
+{% endblock title_head %}
+
+{% block h1_header %}
+Información del alumno {{alumno.nombre}}
+{% endblock h1_header %}
+
+{% block content %}
+{% if alumno.foto %}
+<img src="{{ alumno.foto.url }}" alt="{{ alumno.nombre }}" height= '350px'>
+{% endif %}
+<li>Edad: {{alumno.edad}}</li>
+<li>Curso: {{alumno.curso}}</li>
+<li>Fecha de ingreso: {{alumno.fecha_ingreso}}</li>
+{% if alumno.descripcion %}
+<li>Descripción: {{alumno.descripcion}}</li>
+{% endif %}
+{% endblock content %}

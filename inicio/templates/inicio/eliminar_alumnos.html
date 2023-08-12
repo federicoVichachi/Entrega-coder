@@ -1,0 +1,20 @@
+{% extends 'tbase.html' %}
+
+{% block title_head %}
+<title>Eliminar alumnos</title>
+{% endblock title_head %}
+
+{% block h1_header %}
+Aquí puedes eliminar el alumno {{alumno.nombre}}
+{% endblock h1_header %}
+
+{% block content %}
+
+    <form action={% url 'inicio:eliminar_alumnos' alumno.id %} method='post'>
+        {% csrf_token %}
+        <p>Se eliminara a {{alumno}}</p>
+        <button>Confirmar</button>
+    </form>
+
+
+{% endblock content %}  
